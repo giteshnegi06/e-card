@@ -143,9 +143,9 @@ a { color: var(--green); }
 
 .clock { margin-bottom: 4px; }
 .tl-date { font-family: var(--font-playfair), serif; font-size: .82rem; letter-spacing: .22em; text-transform: uppercase; color: #6a6a52; margin: 26px 0 14px; }
-.tl { list-style: none; width: fit-content; max-width: 100%; margin: 0 auto; }
-.tl li { display: flex; align-items: baseline; justify-content: center; gap: 18px; padding: 10px 0; }
-.tl-time { flex: 0 0 96px; text-align: right; font-family: var(--font-playfair), serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+.tl { list-style: none; width: 100%; }
+.tl li { display: flex; align-items: baseline; justify-content: flex-start; gap: 14px; padding: 10px 0; }
+.tl-time { flex: 0 0 104px; text-align: left; font-family: var(--font-playfair), serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
 .tl-name { text-align: left; font-family: var(--font-playfair), serif; font-size: 1.15rem; font-weight: 500; color: #4b4b38; }
 
 .venue-name { font-family: var(--font-playfair), serif; font-size: 1.4rem; color: var(--green); margin: 10px 0 4px; }

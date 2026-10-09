@@ -10,6 +10,7 @@ export default function ScratchHeart({ date, day, time }) {
   const total = useRef(1);
   const moves = useRef(0);
   const down = useRef(false);
+  const last = useRef(null);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -45,20 +46,39 @@ export default function ScratchHeart({ date, day, time }) {
     const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
     let n = 0;
     for (let i = 3; i < d.length; i += 16) if (d[i] > 10) n++;
-    if (n / total.current < 0.45) setDone(true);
+    if (n / total.current < 0.5) setDone(true);
+  };
+
+  const pos = (e) => {
+    const c = canvasRef.current;
+    const r = c.getBoundingClientRect();
+    const k = c.width / r.width;
+    return [(e.clientX - r.left) * k, (e.clientY - r.top) * k, k];
   };
 
   const scratch = (e) => {
     if (!down.current) return;
     const c = canvasRef.current;
-    const r = c.getBoundingClientRect();
     const ctx = c.getContext("2d");
-    const dpr = c.width / r.width;
+    const [x, y, k] = pos(e);
+    const [lx, ly] = last.current || [x, y];
     ctx.globalCompositeOperation = "destination-out";
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 46 * k;
     ctx.beginPath();
-    ctx.arc((e.clientX - r.left) * dpr, (e.clientY - r.top) * dpr, 22 * dpr, 0, Math.PI * 2);
-    ctx.fill();
-    if (++moves.current % 8 === 0) check();
+    ctx.moveTo(lx, ly);
+    ctx.lineTo(x + 0.01, y);
+    ctx.stroke();
+    last.current = [x, y];
+    if (++moves.current % 6 === 0) check();
+  };
+
+  const end = () => {
+    if (!down.current) return;
+    down.current = false;
+    last.current = null;
+    check();
   };
 
   return (
@@ -84,11 +104,10 @@ export default function ScratchHeart({ date, day, time }) {
           scratch(e);
         }}
         onPointerMove={scratch}
-        onPointerUp={() => {
-          down.current = false;
-          check();
-        }}
-        onPointerCancel={() => (down.current = false)}
+        onPointerUp={end}
+        onPointerCancel={end}
+        onPointerLeave={end}
+        onContextMenu={(e) => e.preventDefault()}
       />
     </div>
   );

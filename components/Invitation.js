@@ -33,6 +33,12 @@ export default function Invitation() {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(W.venue.mapsQuery)}`;
 
   useEffect(() => {
+    // Always start at the hero, never at the browser-restored scroll position.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.style.overflow = open ? "" : "hidden";
   }, [open]);
 

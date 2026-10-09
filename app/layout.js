@@ -16,7 +16,7 @@ export const viewport = { width: "device-width", initialScale: 1, themeColor: "#
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${playfair.variable} ${cormorant.variable} ${vibes.variable} ${dancing.variable} ${deva.variable}`}>{children}</body>
     </html>
   );

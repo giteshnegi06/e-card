@@ -114,7 +114,7 @@ a { color: var(--green); }
 .welcome b { font-weight: 600; font-style: normal; }
 .welcome svg { vertical-align: -3px; margin-left: 6px; }
 .forever { font-family: var(--font-vibes), cursive; font-weight: 400; font-size: 2.55rem; line-height: 1.2; color: var(--green); margin-bottom: 10px; }
-.scratch { position: relative; }
+.scratch { position: relative; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 .scratch-under, .scratch canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .scratch-under { filter: drop-shadow(0 6px 10px rgba(60, 70, 40, .25)); }
 .scratch canvas { touch-action: none; cursor: crosshair; transition: opacity 1s; }
